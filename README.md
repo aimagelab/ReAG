@@ -4,13 +4,13 @@
 
 <div align="center">
   
-  [![Paper](https://img.shields.io/badge/Paper-arxiv.2509.08897-B31B1B.svg)](https://arxiv.org/abs/2509.08897)
+  <!-- [![Paper](https://img.shields.io/badge/Paper-arxiv.2509.08897-B31B1B.svg)](https://arxiv.org/abs/2509.08897) -->
 
 
 </div>
 
 <p align="center">
-  <img src="./02_model.pdf" alt="ReAG" width="840" />
+  <img src="./assets/model.png" alt="ReAG" width="840" />
 </p> 
 
 ## Coming Soon

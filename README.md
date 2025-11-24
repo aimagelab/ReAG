@@ -10,7 +10,7 @@
 </div>
 
 <p align="center">
-  <img src="./model.pdf" alt="ReAG" width="840" />
+  <img src="./02_model.pdf" alt="ReAG" width="840" />
 </p> 
 
 ## Coming Soon

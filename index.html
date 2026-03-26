@@ -186,6 +186,7 @@
     .author a { color: var(--text); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.15); transition: border-color var(--transition); }
     .author a:hover { border-color: var(--accent); color: var(--accent); }
     .equal { font-size: .75rem; color: var(--accent); vertical-align: super; }
+    .affil-sup { font-size: .72rem; color: var(--muted); vertical-align: super; }
 
     .affiliations {
       font-size: .8rem;
@@ -194,6 +195,13 @@
       opacity: 0;
       animation: fadeUp .8s .5s forwards;
     }
+    .affil-list {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 4px 24px;
+      margin-bottom: 6px;
+    }
+    .affil-item { white-space: nowrap; }
+    .affil-num { color: var(--accent); font-weight: 600; margin-right: 3px; }
 
     /* CTA buttons */
     .cta-row {
@@ -780,27 +788,32 @@
 <section id="hero">
   <div class="venue-badge">CVPR 2026 · Accepted</div>
 
-  <h1><em>ReAG</em> — Reasoning-Augmented<br>Generation for Knowledge-based VQA</h1>
+  <!-- FIX 1: titolo senza corsivo su ReAG, senza trattino, titolo completo come nel paper -->
+  <h1>ReAG: Reasoning-Augmented Generation for Knowledge-based Visual Question Answering</h1>
 
   <p class="subtitle">
     A novel multimodal RAG approach that combines coarse- and fine-grained retrieval
     with a critic model, enhanced by reinforcement learning for structured reasoning.
   </p>
 
+  <!-- FIX 2: affiliazioni con apici numerici -->
   <div class="authors">
-    <span class="author">Alberto Compagnoni<sup class="equal">*</sup></span>
-    <span class="author">Marco Morini<sup class="equal">*</sup></span>
-    <span class="author">Sara Sarto</span>
-    <span class="author">Federico Cocchi</span>
-    <span class="author">Davide Caffagni</span>
-    <span class="author">Marcella Cornia</span>
-    <span class="author">Lorenzo Baraldi</span>
-    <span class="author">Rita Cucchiara</span>
+    <span class="author">Alberto Compagnoni<sup class="equal">*,</sup><sup class="affil-sup">1</sup></span>
+    <span class="author">Marco Morini<sup class="equal">*,</sup><sup class="affil-sup">1</sup></span>
+    <span class="author">Sara Sarto<sup class="affil-sup">1</sup></span>
+    <span class="author">Federico Cocchi<sup class="affil-sup">2</sup></span>
+    <span class="author">Davide Caffagni<sup class="affil-sup">1</sup></span>
+    <span class="author">Marcella Cornia<sup class="affil-sup">1</sup></span>
+    <span class="author">Lorenzo Baraldi<sup class="affil-sup">1</sup></span>
+    <span class="author">Rita Cucchiara<sup class="affil-sup">1</sup></span>
   </div>
-  <p class="affiliations">
-    University of Modena and Reggio Emilia &nbsp;·&nbsp; University of Pisa
-    &nbsp; <sup>*</sup>Equal contribution
-  </p>
+  <div class="affiliations">
+    <div class="affil-list">
+      <span class="affil-item"><span class="affil-num">1</span>University of Modena and Reggio Emilia</span>
+      <span class="affil-item"><span class="affil-num">2</span>University of Pisa</span>
+    </div>
+    <span><sup>*</sup>Equal contribution</span>
+  </div>
 
   <div class="cta-row">
     <a class="btn btn-primary" href="https://arxiv.org/abs/2511.22715" target="_blank">
@@ -881,20 +894,22 @@
         <div class="score-label">E-VQA Single-Hop</div>
         <div class="score-dataset">Encyclopedic-VQA · 7B</div>
       </div>
+      <!-- FIX 3: "Gain vs VLM-PRF" → "Gain vs Previous Works" -->
       <div class="score-card">
         <span class="score-num" data-target="+7.8">0</span>
-        <div class="score-label">Gain vs VLM-PRF</div>
-        <div class="score-dataset">E-VQA · 3B backbone</div>
+        <div class="score-label">Gain vs Previous Works</div>
+        <div class="score-dataset">E-VQA · 7B backbone</div>
       </div>
       <div class="score-card">
         <span class="score-num" data-target="81.5">0</span>
         <div class="score-label">Oracle Setting</div>
         <div class="score-dataset">E-VQA Single-Hop · 7B</div>
       </div>
+      <!-- FIX 3: "Passages vs ReflectiVA" → no competitor name -->
       <div class="score-card">
         <span class="score-num" data-target="−18%">0</span>
         <div class="score-label">Noise Reduction</div>
-        <div class="score-dataset">Passages vs ReflectiVA</div>
+        <div class="score-dataset">Passages after Filtering</div>
       </div>
     </div>
   </div>
@@ -909,37 +924,33 @@
        and a generator trained via SFT + GRPO-inspired RL to reason over
        retrieved evidence before producing the final answer.</p>
 
+    <!-- FIX 4: pipeline steps coherent with figure (Retrieval, Filtering, SFT, GRPO) -->
     <div class="pipeline-steps">
       <div class="step">
         <div class="step-num">01</div>
-        <div class="step-title">Coarse Retrieval</div>
-        <p class="step-desc">Embedding-based retrieval using EVA-CLIP-8B over the full query image against a Wikipedia-scale knowledge base.</p>
+        <div class="step-title">Retrieval</div>
+        <p class="step-desc">Multi-level embedding-based retrieval against a Wikipedia-scale knowledge base, combining coarse and fine-grained strategies for high recall.</p>
       </div>
       <div class="step">
         <div class="step-num">02</div>
-        <div class="step-title">Fine-Grained Retrieval</div>
-        <p class="step-desc">Subject detection via GroundingDINO + image crop re-encoded to improve recall on fine-grained entities.</p>
+        <div class="step-title">Filtering</div>
+        <p class="step-desc">A critic model classifies each retrieved passage as relevant or irrelevant, drastically reducing noise before generation.</p>
       </div>
       <div class="step">
         <div class="step-num">03</div>
-        <div class="step-title">Critic Filtering</div>
-        <p class="step-desc">An MLLM critic classifies each passage as relevant or irrelevant — reducing 128 passages to just ~5.7 on average.</p>
+        <div class="step-title">SFT</div>
+        <p class="step-desc">Generator trained via supervised fine-tuning on synthetic reasoning traces to acquire the structured <code>&lt;think&gt;/&lt;answer&gt;</code> format as a cold start.</p>
       </div>
       <div class="step">
         <div class="step-num">04</div>
-        <div class="step-title">RL Generation</div>
-        <p class="step-desc">Generator trained via SFT cold-start + GRPO reinforcement learning produces explicit reasoning traces before the final answer.</p>
+        <div class="step-title">GRPO</div>
+        <p class="step-desc">Reinforcement learning with task-specific accuracy and format rewards enables free exploration of diverse reasoning trajectories.</p>
       </div>
     </div>
   </div>
 
   <!-- Method figure -->
   <div class="reveal method-fig">
-    <!-- <div class="img-placeholder" style="aspect-ratio:16/7">
-      <span class="img-placeholder-icon">🔬</span>
-      <span>Method Overview Figure — <code>method.png</code></span>
-      <span style="font-size:.75rem;opacity:.6">Full pipeline: Retrieval · Critic · SFT · GRPO</span>
-    </div> -->
     <img src="images/model (2)/f3c901f4-1.png" />
     <p class="img-caption">Figure 2. Overview of the proposed ReAG model. Multi-level retriever → critic filtering → SFT cold-start → RL training.</p>
   </div>
@@ -964,11 +975,13 @@
             <p>spaCy noun-phrase extraction + GroundingDINO localization. Cropped region re-encoded for entity-specific retrieval.</p>
           </div>
         </div>
+        <!-- FIX 5: "Critic compression at k=20" → "Passage Filtering at k=20" -->
         <div style="margin-top:28px">
-          <div class="section-label" style="margin-bottom:8px">Critic compression at k=20</div>
+          <div class="section-label" style="margin-bottom:8px">Passage Filtering at k=20</div>
           <div class="bar-row">
+            <!-- FIX 5: bar labels: "w/o Filtering", "ReflectiVA", "ReAG" -->
             <div class="bar-item">
-              <div class="bar-meta"><span>w/o Critic</span><span>128.6 passages</span></div>
+              <div class="bar-meta"><span>w/o Filtering</span><span>128.6 passages</span></div>
               <div class="bar-track"><div class="bar-fill" style="width:100%;background:rgba(122,122,153,.4)"></div></div>
             </div>
             <div class="bar-item">
@@ -976,17 +989,13 @@
               <div class="bar-track"><div class="bar-fill" data-w="5.5" style="background:rgba(167,139,250,.6)"></div></div>
             </div>
             <div class="bar-item">
-              <div class="bar-meta"><span>ReAG Critic</span><span>5.7 passages</span></div>
+              <div class="bar-meta"><span>ReAG</span><span>5.7 passages</span></div>
               <div class="bar-track"><div class="bar-fill" data-w="4.4"></div></div>
             </div>
           </div>
         </div>
       </div>
       <div>
-        <!-- <div class="img-placeholder img-placeholder-sm">
-          <span class="img-placeholder-icon">📊</span>
-          <span>Critic analysis chart — <code>critic_analysis.png</code></span>
-        </div> -->
         <img src="images/inverted_combined_plot_legend_18_cropped/dd2c36f8-1.png" />
       </div>
     </div>
@@ -1000,7 +1009,8 @@
     <h2>Multi-Stage Learning</h2>
     <div class="two-col">
       <div>
-        <p>Inspired by DeepSeek-R1, ReAG employs a deliberate two-phase strategy:
+        <!-- FIX 6: rimosso "Inspired by DeepSeek-R1" e "deliberate" -->
+        <p>ReAG employs a two-phase strategy:
            SFT instills basic structured reasoning behavior, while RL unlocks free exploration
            of diverse reasoning trajectories without the constraint of a KL penalty.</p>
         <div class="timeline">
@@ -1028,10 +1038,6 @@
         </div>
       </div>
       <div style="position:sticky; top: 80px;">
-        <!-- <div class="img-placeholder img-placeholder-sm">
-          <span class="img-placeholder-icon">📈</span>
-          <span>Training reward curve — <code>reward_curve.png</code></span>
-        </div> -->
         <img src="images/reward_plot/7eb31969-1.png" />
         <p class="img-caption">Figure 5. Task-specific accuracy reward progression across training iterations of the ReAG 7B generator.</p>
       </div>
@@ -1062,6 +1068,11 @@
         </thead>
         <tbody>
           <tr><td colspan="7" style="background:rgba(255,255,255,.02);color:var(--muted);font-size:.72rem;padding:8px 16px;letter-spacing:.05em">ZERO-SHOT BASELINES</td></tr>
+          <!-- FIX 7: aggiunta riga Qwen2.5-VL-3B ZS — inserire i valori corretti dal paper -->
+          <tr>
+            <td>Qwen2.5-VL-3B (ZS)</td><td>—</td>
+            <td>21.9</td><td>21.9</td><td>18.9</td><td>17.7</td><td>18.3</td>
+          </tr>
           <tr>
             <td>Qwen2.5-VL-7B (ZS)</td><td>—</td>
             <td>23.6</td><td>23.2</td><td>22.8</td><td>24.1</td><td>23.7</td>
@@ -1104,75 +1115,20 @@
     </div>
     <p class="img-caption">Table 1. VQA accuracy scores on Encyclopedic-VQA test set and InfoSeek validation set. <span class="score-delta" style="display:inline">+delta</span> vs best prior method at same scale.</p>
   </div>
-
-  <!-- <div class="reveal" style="margin-top:48px">
-    <div class="two-col">
-      <div>
-        <div class="img-placeholder img-placeholder-sm">
-          <span class="img-placeholder-icon">📊</span>
-          <span>w/ vs w/o evidence chart — <code>evidence_chart.png</code></span>
-        </div>
-        <p class="img-caption">Figure 3 (left). Performance with and without the evidence passage in context, including oracle upper bounds.</p>
-      </div>
-      <div>
-        <div class="img-placeholder img-placeholder-sm">
-          <span class="img-placeholder-icon">📈</span>
-          <span>Top-k passages analysis — <code>topk_chart.png</code></span>
-        </div>
-        <p class="img-caption">Figure 3 (right). Average number of passages retained at different top-k values for ReAG vs ReflectiVA.</p>
-      </div>
-    </div>
-  </div> -->
 </section>
-
-<!-- ═══ ABLATION ════════════════════════════════════════════════ -->
-<!-- <section>
-  <div class="reveal">
-    <div class="section-label">Ablation</div>
-    <h2>Every Component Matters</h2>
-    <p>Progressive enabling of components validates each design choice independently.</p>
-    <div class="table-wrap" style="margin-top:28px">
-      <table>
-        <thead>
-          <tr>
-            <th>Coarse</th><th>Fine-Grained</th><th>Critic</th><th>SFT</th><th>Reas. Traces</th><th>RL</th>
-            <th>E-VQA SH</th><th>InfoSeek All</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>21.9</td><td>18.3</td></tr>
-          <tr><td>✓</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>19.2</td><td>10.1</td></tr>
-          <tr><td>✓</td><td>—</td><td>✓</td><td>—</td><td>—</td><td>—</td><td>38.0</td><td>27.0</td></tr>
-          <tr><td>✓</td><td>✓</td><td>✓</td><td>—</td><td>—</td><td>—</td><td>40.2</td><td>27.1</td></tr>
-          <tr><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>—</td><td>—</td><td>39.3</td><td>37.5</td></tr>
-          <tr><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>—</td><td>38.1</td><td>41.3</td></tr>
-          <tr><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>—</td><td>✓</td><td>39.5</td><td>39.6</td></tr>
-          <tr class="row-ours">
-            <td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td>
-            <td class="score-best">41.3</td><td class="score-best">43.3</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="img-caption">Table 4. Ablation study on Encyclopedic-VQA and InfoSeek — Qwen2.5-VL-3B, k=20.</p>
-  </div>
-</section> -->
 
 <!-- ═══ QUALITATIVE ════════════════════════════════════════════= -->
 <section id="qualitative">
   <div class="reveal">
     <div class="section-label">Qualitative Results</div>
     <h2>Reasoning Traces in Action</h2>
+    <!-- FIX 8: rimosso il trattino "—" dalla frase -->
     <p>ReAG generates explicit, structured reasoning traces that ground the answer
-       in both visual evidence and retrieved passages — providing full explainability.</p>
+       in both visual evidence and retrieved passages, providing full explainability.</p>
 
     <div class="qual-grid">
       <!-- Card 1 -->
       <div class="qual-card">
-        <!-- <div class="img-placeholder img-placeholder-sq" style="border-radius:0;border:none">
-          <span class="img-placeholder-icon">🦅</span>
-          <span style="font-size:.72rem">Bird image — <code>qual_bird.jpg</code></span>
-        </div> -->
         <img src="images/qual/gabbiano.png" />
         <div class="qual-body">
           <div class="qual-q">Q: What is the closest upper taxonomy of this bird?</div>
@@ -1197,10 +1153,6 @@
       </div>
       <!-- Card 2 -->
       <div class="qual-card">
-        <!-- <div class="img-placeholder img-placeholder-sq" style="border-radius:0;border:none">
-          <span class="img-placeholder-icon">🌉</span>
-          <span style="font-size:.72rem">Bridge image — <code>qual_bridge.jpg</code></span>
-        </div> -->
         <img src="images/qual/bridge.png" />
         <div class="qual-body">
           <div class="qual-q">Q: Which road, railway or canal does this bridge carry?</div>
@@ -1225,10 +1177,6 @@
       </div>
       <!-- Card 3 -->
       <div class="qual-card">
-        <!-- <div class="img-placeholder img-placeholder-sq" style="border-radius:0;border:none">
-          <span class="img-placeholder-icon">🚗</span>
-          <span style="font-size:.72rem">Vehicle image — <code>qual_vehicle.jpg</code></span>
-        </div> -->
         <img src="images/qual/car.png" />
         <div class="qual-body">
           <div class="qual-q">Q: What is the brand of this vehicle?</div>
@@ -1260,11 +1208,6 @@
     <div class="abstract-box">
       <div class="two-col" style="gap:24px;align-items:flex-start">
         <div>
-          <!-- Sostituisci l'immagine del dock qui -->
-          <!-- <div class="img-placeholder img-placeholder-sq" style="aspect-ratio:4/3;border-radius:12px;border:1px dashed rgba(108,143,255,.35)">
-            <span class="img-placeholder-icon">🖼️</span>
-            <span style="font-size:.78rem">Dock image — replace with your photo</span>
-          </div> -->
           <img src="images/qual/dock.jpg" style="border-radius:12px;border:1px dashed rgba(108,143,255,.35)" />
           <p class="qual-q" style="margin-top:12px">Q: Who designed this dock?</p>
         </div>
@@ -1300,16 +1243,6 @@
       </div>
     </div>
   </div>
-
-  <!-- More qual figures -->
-  <!-- <div class="reveal" style="margin-top:40px">
-    <div class="img-placeholder" style="aspect-ratio:16/9">
-      <span class="img-placeholder-icon">🖼️</span>
-      <span>Extended qualitative grid — <code>qualitative_grid.png</code></span>
-      <span style="font-size:.75rem;opacity:.6">Figure 10: InfoSeek and E-VQA comparisons</span>
-    </div>
-    <p class="img-caption">Figure 10. Extended qualitative results comparing ReAG, ReflectiVA, and zero-shot Qwen2.5-VL-7B on InfoSeek and Encyclopedic-VQA.</p>
-  </div> -->
 </section>
 
 <!-- ═══ CONTRIBUTIONS ══════════════════════════════════════════= -->
@@ -1345,16 +1278,13 @@
   <div class="reveal">
     <div class="section-label">Citation</div>
     <h2>BibTeX</h2>
+    <!-- FIX 9: no line breaks inside title/author/booktitle; title in double braces -->
     <div class="bibtex-box">
       <button class="copy-btn" onclick="copyBib(this)">Copy</button>
       <pre id="bib-text">@inproceedings{compagnoni2026reag,
-  title     = {ReAG: Reasoning-Augmented Generation for
-               Knowledge-based Visual Question Answering},
-  author    = {Compagnoni, Alberto and Morini, Marco and Sarto, Sara
-               and Cocchi, Federico and Caffagni, Davide and
-               Cornia, Marcella and Baraldi, Lorenzo and Cucchiara, Rita},
-  booktitle = {Proceedings of the IEEE/CVF Conference on
-               Computer Vision and Pattern Recognition (CVPR)},
+  title     = {{ReAG: Reasoning-Augmented Generation for Knowledge-based Visual Question Answering}},
+  author    = {Compagnoni, Alberto and Morini, Marco and Sarto, Sara and Cocchi, Federico and Caffagni, Davide and Cornia, Marcella and Baraldi, Lorenzo and Cucchiara, Rita},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
   year      = {2026}
 }</pre>
     </div>

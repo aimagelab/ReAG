@@ -6,6 +6,7 @@
   
 [![Conference](https://img.shields.io/badge/CVPR-2026(Highlight)-f9f107.svg)](https://arxiv.org/abs/2511.22715)
 [![Paper](https://img.shields.io/badge/Paper-arxiv.2511.22715-B31B1B.svg)](https://arxiv.org/abs/2511.22715)
+[![Project Page](https://img.shields.io/badge/🌐-Project%20Page-blue.svg)](https://aimagelab.github.io/ReAG/)
 
 
 </div>

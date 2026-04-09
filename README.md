@@ -4,7 +4,8 @@
 
 <div align="center">
   
-  <!-- [![Paper](https://img.shields.io/badge/Paper-arxiv.2509.08897-B31B1B.svg)](https://arxiv.org/abs/2509.08897) -->
+[![Conference](https://img.shields.io/badge/CVPR-2026(Highlight)-f9f107.svg)](https://arxiv.org/abs/2511.22715)
+[![Paper](https://img.shields.io/badge/Paper-arxiv.2511.22715-B31B1B.svg)](https://arxiv.org/abs/2511.22715)
 
 
 </div>

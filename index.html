@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Add logo -->
   <link rel="icon" type="image/x-icon" href="images/logo.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -786,9 +785,8 @@
 
 <!-- ═══ HERO ═══════════════════════════════════════════════════ -->
 <section id="hero">
-  <div class="venue-badge">CVPR 2026 · Accepted</div>
+  <div class="venue-badge">✨CVPR 2026 Highlight✨</div>
 
-  <!-- FIX 1: titolo senza corsivo su ReAG, senza trattino, titolo completo come nel paper -->
   <h1>ReAG: Reasoning-Augmented Generation for Knowledge-based Visual Question Answering</h1>
 
   <p class="subtitle">
@@ -796,7 +794,6 @@
     with a critic model, enhanced by reinforcement learning for structured reasoning.
   </p>
 
-  <!-- FIX 2: affiliazioni con apici numerici -->
   <div class="authors">
     <span class="author">Alberto Compagnoni<sup class="equal">*,</sup><sup class="affil-sup">1,2</sup></span>
     <span class="author">Marco Morini<sup class="equal">*,</sup><sup class="affil-sup">1</sup></span>
@@ -894,7 +891,6 @@
         <div class="score-label">E-VQA Single-Hop</div>
         <div class="score-dataset">Encyclopedic-VQA · 7B</div>
       </div>
-      <!-- FIX 3: "Gain vs VLM-PRF" → "Gain vs Previous Works" -->
       <div class="score-card">
         <span class="score-num" data-target="+7.8">0</span>
         <div class="score-label">Gain vs Previous Works</div>
@@ -905,7 +901,6 @@
         <div class="score-label">Oracle Setting</div>
         <div class="score-dataset">E-VQA Single-Hop · 7B</div>
       </div>
-      <!-- FIX 3: "Passages vs ReflectiVA" → no competitor name -->
       <div class="score-card">
         <span class="score-num" data-target="−18%">0</span>
         <div class="score-label">Noise Reduction</div>
@@ -924,7 +919,6 @@
        and a generator trained via SFT + GRPO-inspired RL to reason over
        retrieved evidence before producing the final answer.</p>
 
-    <!-- FIX 4: pipeline steps coherent with figure (Retrieval, Filtering, SFT, GRPO) -->
     <div class="pipeline-steps">
       <div class="step">
         <div class="step-num">01</div>
@@ -975,11 +969,9 @@
             <p>spaCy noun-phrase extraction + GroundingDINO localization. Cropped region re-encoded for entity-specific retrieval.</p>
           </div>
         </div>
-        <!-- FIX 5: "Critic compression at k=20" → "Passage Filtering at k=20" -->
         <div style="margin-top:28px">
           <div class="section-label" style="margin-bottom:8px">Passage Filtering at k=20</div>
           <div class="bar-row">
-            <!-- FIX 5: bar labels: "w/o Filtering", "ReflectiVA", "ReAG" -->
             <div class="bar-item">
               <div class="bar-meta"><span>w/o Filtering</span><span>128.6 passages</span></div>
               <div class="bar-track"><div class="bar-fill" style="width:100%;background:rgba(122,122,153,.4)"></div></div>
@@ -1009,7 +1001,6 @@
     <h2>Multi-Stage Learning</h2>
     <div class="two-col">
       <div>
-        <!-- FIX 6: rimosso "Inspired by DeepSeek-R1" e "deliberate" -->
         <p>ReAG employs a two-phase strategy:
            SFT instills basic structured reasoning behavior, while RL unlocks free exploration
            of diverse reasoning trajectories without the constraint of a KL penalty.</p>
@@ -1068,7 +1059,6 @@
         </thead>
         <tbody>
           <tr><td colspan="7" style="background:rgba(255,255,255,.02);color:var(--muted);font-size:.72rem;padding:8px 16px;letter-spacing:.05em">ZERO-SHOT BASELINES</td></tr>
-          <!-- FIX 7: aggiunta riga Qwen2.5-VL-3B ZS — inserire i valori corretti dal paper -->
           <tr>
             <td>Qwen2.5-VL-3B (ZS)</td><td>—</td>
             <td>21.9</td><td>21.9</td><td>18.9</td><td>17.7</td><td>18.3</td>
@@ -1122,7 +1112,6 @@
   <div class="reveal">
     <div class="section-label">Qualitative Results</div>
     <h2>Reasoning Traces in Action</h2>
-    <!-- FIX 8: rimosso il trattino "—" dalla frase -->
     <p>ReAG generates explicit, structured reasoning traces that ground the answer
        in both visual evidence and retrieved passages, providing full explainability.</p>
 
@@ -1278,7 +1267,6 @@
   <div class="reveal">
     <div class="section-label">Citation</div>
     <h2>BibTeX</h2>
-    <!-- FIX 9: no line breaks inside title/author/booktitle; title in double braces -->
     <div class="bibtex-box">
       <button class="copy-btn" onclick="copyBib(this)">Copy</button>
       <pre id="bib-text">@inproceedings{compagnoni2026reag,

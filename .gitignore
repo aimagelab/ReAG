@@ -1,0 +1,6 @@
+logs/
+debug/
+.vscode
+.venv/
+__pycache__/
+evqa_eval/

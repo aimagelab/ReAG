@@ -56,7 +56,7 @@ We use two separate environments:
 1. `.venv` — main inference environment (PyTorch + Transformers)
 2. `evqa-eval` — EVQA evaluation environment (TensorFlow stack), kept separate due to TF/PyTorch conflicts
 
-### 1) Create the inference environment (`.venv`)
+### 1) Create the inference environment
 
 ```bash
 python3.11 -m venv .venv
@@ -74,7 +74,7 @@ python -m pip install -r requirements.txt
 
 If you use `conda`, you can install the packages from [requirements.txt](requirements.txt) in an activated conda environment.
 
-### 2) Create the EVQA evaluation environment (`evqa-eval`)
+### 2) Create the EVQA evaluation environment
 
 This environment is only needed to run the EVQA evaluation scripts. TensorFlow dependencies conflicts with the main inference stack, so we kept it separate.
 
@@ -113,8 +113,8 @@ Our work uses two knowledge bases, one per benchmark. To enhance reproducibility
 
 Once datasets and indexes are in place, unzip all archives and update the paths in the `.sh` scripts to match your local filesystem. We provide two ready-to-use scripts:
 
-- EVQA: [retrieval_evqa.sh](retrieval_evqa.sh)
-- Infoseek: [retrieval_infoseek.sh](retrieval_infoseek.sh)
+- EVQA: [retrieval_evqa.sh](src/retrieval_module/retrieval_evqa.sh)
+- Infoseek: [retrieval_infoseek.sh](src/retrieval_module/retrieval_infoseek.sh)
 
 These scripts are written as Slurm jobs. For local runs, remove the Slurm directives and `srun` prefix while keeping the rest of the command unchanged.
 
@@ -129,7 +129,7 @@ sbatch retrieval_infoseek.sh
 
 ### What the scripts do
 
-Both scripts invoke [src/retrieval_module/retrieval.py](src/retrieval_module/retrieval.py) with a common set of flags representing the **full end-to-end ReAG pipeline**:
+Both scripts invoke [retrieval.py](src/retrieval_module/retrieval.py) with a common set of flags representing the **full end-to-end ReAG pipeline**:
 
 - `--model_name "aimagelab/ReAG-3B"`
 - `--top_k 20`

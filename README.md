@@ -153,10 +153,10 @@ Results are written under the `--output_root` directory. The script automaticall
 If you use this code, please cite our CVPR 2026 paper:
 
 ```bibtex
-@article{compagnoni2025reag,
-  title={ReAG: Reasoning-Augmented Generation for Knowledge-based Visual Question Answering},
+@inproceedings{compagnoni2026reag,
+  title={{ReAG: Reasoning-Augmented Generation for Knowledge-based Visual Question Answering}},
   author={Compagnoni, Alberto and Morini, Marco and Sarto, Sara and Cocchi, Federico and Caffagni, Davide and Cornia, Marcella and Baraldi, Lorenzo and Cucchiara, Rita},
-  journal={arXiv preprint arXiv:2511.22715},
-  year={2025}
+  booktitle={Proceedings of the IEEE/CVF Computer Vision and Pattern Recognition Conference},
+  year={2026}
 }
 ```

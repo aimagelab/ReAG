@@ -7,7 +7,7 @@
 [![Conference](https://img.shields.io/badge/CVPR-2026(Highlight)-f9f107.svg)](https://cvpr.thecvf.com/virtual/2026/poster/37311)
 [![Paper](https://img.shields.io/badge/Paper-arxiv.2511.22715-B31B1B.svg)](https://arxiv.org/abs/2511.22715)
 [![Project Page](https://img.shields.io/badge/🌐-Project%20Page-blue.svg)](https://aimagelab.github.io/ReAG/)
-[![HF Collection](https://img.shields.io/badge/🤗-Project%20Page-yellow.svg)](https://huggingface.co/collections/aimagelab/reag)
+[![HF Collection](https://img.shields.io/badge/🤗-HF%20Collection-yellow.svg)](https://huggingface.co/collections/aimagelab/reag)
 </div>
 
 <p align="center">
